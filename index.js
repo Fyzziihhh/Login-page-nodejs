@@ -4,12 +4,13 @@ const nocache = require('nocache');
 const app = express();
 
 // Set up express-session middleware
+
 app.use(nocache());
 app.use(session({
   secret: 'secret_key', 
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } // Set secure to true if using HTTPS
+  cookie: { secure: false }  // Set secure to true if using HTTPS
 }));
 
 // Set the view engine to ejs
@@ -76,3 +77,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
