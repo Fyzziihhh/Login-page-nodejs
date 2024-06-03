@@ -1,7 +1,7 @@
 const express = require('express');
+const app = express();
 const session = require('express-session');
 const nocache = require('nocache');
-const app = express();
 
 // Set up express-session middleware
 
@@ -25,6 +25,8 @@ let userInfo = {
 };
 
 app.use(express.static("./public"));
+
+
 //check  the user is loggedin or not
 function checkAuth(req, res, next) {
   if (req.session.userLoggedIn) {
@@ -33,6 +35,7 @@ function checkAuth(req, res, next) {
     res.redirect('/');
   }
 }
+
 //if user is loggedin then redirect to the dashboard
 app.get("/", (req, res) => {
   if (req.session.userLoggedIn) {
@@ -71,6 +74,22 @@ app.get('/logout', (req, res) => {
     }
   });
 });
+
+
+// app.get("/operation",(req,res)=>{
+//   let {num1,num2,operator}=req.query
+//   console.log(req.query);
+//    if(operator=="plus"){
+//     num1=Number(num1)
+//     num2=parseInt(num2)
+//     res.send(num1+num2)
+//    } 
+//     else if (operator=="minus") res.send(num1-num2)
+//     else if (operator=="mul") res.send(num1*num2)
+//     else if (operator=="div") res.send(num1/num2)
+//   else res.send("invalid operator")
+
+// })
 
 // Start the server
 const PORT = process.env.PORT || 3000;
